@@ -1,48 +1,109 @@
-# n8n-telegram-api-bot
+# n8n Telegram API Bot
 
-1. Project Name
-Automated API Data Fetcher & Telegram Distribution System (Daily Motivation Bot)
+Workflow otomatis untuk mengambil data dari REST API, memformatnya, lalu mengirimkannya ke Telegram menggunakan n8n.
 
-2. Business Problem
-Mendistribusikan informasi harian, pengumuman, atau pembaruan data secara manual ke dalam grup komunikasi tim memakan waktu, rentan terlewat, dan sangat repetitif.
+## 1. Nama Proyek
 
-3. Proposed Solution
-Membangun serverless workflow menggunakan n8n yang secara otomatis menarik data dari eksternal REST API, memformat data tersebut, dan mendistribusikannya langsung ke Telegram tanpa intervensi manusia.
+**Automated API Data Fetcher & Telegram Distribution System**  
+Daily Motivation Bot berbasis n8n.
 
-4. Workflow Architecture
-Telegram Trigger ➡️ HTTP Request (REST API) ➡️ Data Transformation (Expressions) ➡️ Telegram Action
+## 2. Latar Belakang Masalah
 
-5. Tools Used
+Mendistribusikan informasi harian, pengumuman, atau pembaruan data secara manual ke grup komunikasi tim:
 
-n8n (Workflow Automation)
+- Memakan waktu.
+- Rentan terlewat.
+- Bersifat repetitif.
 
-Telegram Bot API (Messaging Interface)
+## 3. Solusi yang Ditawarkan
 
-ZenQuotes Public API (Data Source)
+Proyek ini membangun workflow serverless menggunakan **n8n** untuk:
 
-6. n8n Nodes Used
+1. Menerima perintah teks dari pengguna melalui Telegram.
+2. Mengambil data dari REST API eksternal.
+3. Memformat data menggunakan n8n Expressions.
+4. Mengirimkan hasilnya kembali ke Telegram secara otomatis.
 
-Telegram Trigger (On Message)
+Dengan demikian, proses distribusi informasi dapat berjalan tanpa intervensi manual.
 
-HTTP Request (GET Method)
+## 4. Arsitektur Workflow
 
-Telegram Action (Send Text Message)
+```text
+Telegram Trigger
+      ↓
+HTTP Request (REST API)
+      ↓
+Data Transformation (Expressions)
+      ↓
+Telegram Action
+```
 
-7. Input & Processing
+## 5. Teknologi yang Digunakan
 
-Input: Perintah teks dari pengguna di Telegram.
+| Teknologi | Fungsi |
+| --- | --- |
+| **n8n** | Platform workflow automation |
+| **Telegram Bot API** | Antarmuka untuk menerima dan mengirim pesan |
+| **ZenQuotes Public API** | Sumber data kutipan motivasi |
 
-Processing: HTTP GET Request mengeksekusi panggilan ke endpoint API eksternal. Data JSON yang diterima {"q": "quote", "a": "author"} diekstrak menggunakan n8n Expressions ({{ $json.q }}) agar formatnya sesuai dengan template pesan yang diinginkan.
+## 6. Node n8n yang Digunakan
 
-8. Output
-Pesan teks dinamis yang dikirimkan secara instan ke Chat ID Telegram spesifik.
+- **Telegram Trigger** — menerima pesan dari pengguna.
+- **HTTP Request** — melakukan request dengan metode `GET` ke REST API.
+- **Telegram Action** — mengirimkan pesan teks ke pengguna atau grup Telegram.
 
-9. Security & Error Handling (Basic)
+## 7. Input dan Pemrosesan Data
 
-API Token Telegram diamankan di dalam sistem Credentials Manager n8n, tidak disisipkan (hardcoded) di dalam node.
+### Input
 
-10. Business Value & Time Saved
+Perintah teks yang dikirimkan pengguna melalui Telegram.
 
-Mengeliminasi 100% intervensi manusia dalam proses pencarian dan pengiriman data harian.
+### Processing
 
-Scalable: Konsep ini dapat direplikasi untuk mengirimkan laporan laba-rugi harian, notifikasi server down, atau lead alert dari CRM langsung ke HP eksekutif.
+Node **HTTP Request** melakukan pemanggilan ke endpoint API eksternal. Data JSON yang diterima memiliki format berikut:
+
+```json
+{
+  "q": "quote",
+  "a": "author"
+}
+```
+
+Data kemudian diekstrak menggunakan n8n Expressions, misalnya:
+
+```text
+{{ $json.q }}
+{{ $json.a }}
+```
+
+Hasil ekstraksi digunakan untuk menyusun pesan yang akan dikirimkan melalui Telegram.
+
+## 8. Output
+
+Pesan teks dinamis yang dikirimkan secara otomatis ke Chat ID Telegram yang ditentukan.
+
+Contoh format pesan:
+
+```text
+"Quote of the day"
+— Author
+```
+
+## 9. Keamanan dan Error Handling
+
+- Token API Telegram disimpan menggunakan **Credentials Manager** di n8n.
+- Token tidak ditulis secara langsung (*hardcoded*) di dalam node atau workflow.
+- Workflow dapat dikembangkan lebih lanjut dengan menambahkan penanganan error untuk kegagalan request API atau pengiriman pesan.
+
+## 10. Nilai Bisnis
+
+Workflow ini membantu menghilangkan intervensi manual dalam proses pencarian dan pengiriman informasi harian.
+
+Konsepnya juga dapat dikembangkan untuk mengirimkan:
+
+- Laporan laba-rugi harian.
+- Notifikasi ketika server mengalami gangguan.
+- Peringatan atau *lead alert* dari CRM.
+- Pengumuman otomatis ke grup komunikasi tim.
+
+Dengan struktur workflow yang fleksibel, sistem dapat direplikasi dan disesuaikan untuk berbagai kebutuhan bisnis.

@@ -37,6 +37,8 @@ Data Transformation (Expressions)
       ↓
 Telegram Action
 ```
+<img width="1916" height="936" alt="image" src="https://github.com/user-attachments/assets/f82d339b-2f49-4288-8685-f5daba92cb16" />
+
 
 ## 5. Teknologi yang Digunakan
 
@@ -77,6 +79,8 @@ Data kemudian diekstrak menggunakan n8n Expressions, misalnya:
 ```
 
 Hasil ekstraksi digunakan untuk menyusun pesan yang akan dikirimkan melalui Telegram.
+<img width="709" height="287" alt="image" src="https://github.com/user-attachments/assets/c6d1296f-c831-458f-b43a-2cc9eb9d2df6" />
+
 
 ## 8. Output
 
@@ -88,6 +92,8 @@ Contoh format pesan:
 "Quote of the day"
 — Author
 ```
+<img width="720" height="835" alt="image" src="https://github.com/user-attachments/assets/da800230-7e10-4370-8ae8-eb611f16abc2" />
+
 
 ## 9. Keamanan dan Error Handling
 

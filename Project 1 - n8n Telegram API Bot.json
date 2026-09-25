@@ -1,0 +1,107 @@
+{
+  "name": "Project 1 - n8n Telegram API Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d41faef2-d084-4822-a623-c00d733b8891",
+      "name": "Telegram Trigger",
+      "webhookId": "5abba7c4-dd69-4e14-b41b-389c446663c8",
+      "credentials": {
+        "telegramApi": {
+          "id": "U2gPXQLc1VrDFugj",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5160693473",
+        "text": "={{ $json.q }}-{{ $json.a }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        0
+      ],
+      "id": "1001ed47-9691-4b66-b3d0-b460d1f98347",
+      "name": "Send a text message",
+      "webhookId": "38e8c59c-d909-46a0-bcdf-fe9429d21e57",
+      "credentials": {
+        "telegramApi": {
+          "id": "U2gPXQLc1VrDFugj",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://zenquotes.io/api/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "44c3e9ee-c836-470d-8870-8ade8f029eaf",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "17c458c8-899f-45f9-ae57-9f84962c9af1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "78020135ce1e18d23f1d2826518029bcddfec44dbf18b7fe235e495f881aa588"
+  },
+  "nodeGroups": [],
+  "id": "qHL8f96cx36YfKIE",
+  "tags": []
+}
